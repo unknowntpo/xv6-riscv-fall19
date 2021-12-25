@@ -30,6 +30,11 @@ OBJS = \
   $K/plic.o \
   $K/virtio_disk.o
 
+docker:
+	# build the image locally
+	#@docker build -t unknowntpo/6.s081 .
+	@docker run -it -v "$$(pwd)":/xv6 unknowntpo/6.s081:latest
+
 # riscv64-unknown-elf- or riscv64-linux-gnu-
 # perhaps in /opt/riscv/bin
 #TOOLPREFIX = 
@@ -261,4 +266,4 @@ myapi.key:
 	fi;
 
 
-.PHONY: handin tarball-pref clean grade handin-check
+.PHONY: docker handin tarball-pref clean grade handin-check
