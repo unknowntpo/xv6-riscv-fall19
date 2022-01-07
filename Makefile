@@ -30,11 +30,6 @@ OBJS = \
   $K/plic.o \
   $K/virtio_disk.o
 
-docker:
-	# build the image locally
-	#@docker build -t unknowntpo/6.s081 .
-	@docker run -it -v "$$(pwd)":/xv6 unknowntpo/6.s081:latest
-
 # riscv64-unknown-elf- or riscv64-linux-gnu-
 # perhaps in /opt/riscv/bin
 #TOOLPREFIX = 
@@ -145,6 +140,7 @@ UPROGS=\
 	$U/_bcachetest\
 	$U/_mounttest\
 	$U/_crashtest\
+	$U/_sleep\
 
 fs.img: mkfs/mkfs README user/xargstest.sh $(UPROGS)
 	mkfs/mkfs fs.img README user/xargstest.sh $(UPROGS)
@@ -265,5 +261,9 @@ myapi.key:
 		false; \
 	fi;
 
+docker:
+	# build the image locally
+	#@docker build -t unknowntpo/6.s081 .
+	@docker run -it -v "$$(pwd)":/xv6 unknowntpo/6.s081:latest
 
 .PHONY: docker handin tarball-pref clean grade handin-check
