@@ -1,0 +1,17 @@
+BasedOnStyle: LLVM
+Language: Cpp
+MaxEmptyLinesToKeep: 3
+IndentCaseLabels: false
+AllowShortIfStatementsOnASingleLine: false
+AllowShortCaseLabelsOnASingleLine: false
+AllowShortLoopsOnASingleLine: false
+AlwaysBreakAfterDefinitionReturnType: All
+DerivePointerAlignment: false
+PointerAlignment: Right
+SpaceAfterCStyleCast: true
+SortIncludes: false
+TabWidth: 2
+UseTab: Never
+IndentWidth: 2
+BreakBeforeBraces: Linux
+AccessModifierOffset: -4
