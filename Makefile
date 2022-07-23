@@ -48,11 +48,6 @@ TOOLPREFIX := $(shell if riscv64-unknown-elf-objdump -i 2>&1 | grep 'elf64-big' 
 	echo "***" 1>&2; exit 1; fi)
 endif
 
-.PHONY: docker
-docker:
-	@echo "Running xv6-riscv inside docker container"
-	@docker run -it -v "$(pwd)":/xv6 unknowntpo/6.s081
-
 QEMU = qemu-system-riscv64
 
 CC = $(TOOLPREFIX)gcc
@@ -162,6 +157,11 @@ clean:
         $U/usys.S \
 	$(UPROGS)
 
+.PHONY: docker
+docker:
+	@echo "Running xv6-riscv inside docker container"
+	@docker run -it -v "$(pwd)":/xv6 unknowntpo/6.s081
+
 # try to generate a unique GDB port
 GDBPORT = $(shell expr `id -u` % 5000 + 25000)
 # QEMU's gdb stub command line changed in 0.11
@@ -171,6 +171,8 @@ QEMUGDB = $(shell if $(QEMU) -help | grep -q '^-gdb'; \
 ifndef CPUS
 CPUS := 1
 endif
+
+
 
 QEMUEXTRA = 
 QEMUOPTS = -machine virt -bios none -kernel $K/kernel -m 128M -smp $(CPUS) -nographic
