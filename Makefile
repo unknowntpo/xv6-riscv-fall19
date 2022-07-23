@@ -48,6 +48,11 @@ TOOLPREFIX := $(shell if riscv64-unknown-elf-objdump -i 2>&1 | grep 'elf64-big' 
 	echo "***" 1>&2; exit 1; fi)
 endif
 
+.PHONY: docker
+docker:
+	@echo "Running xv6-riscv inside docker container"
+	@docker run -it -v "$(pwd)":/xv6 unknowntpo/6.s081
+
 QEMU = qemu-system-riscv64
 
 CC = $(TOOLPREFIX)gcc
